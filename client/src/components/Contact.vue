@@ -21,7 +21,7 @@
 export default {
   props: ['contact'],
   methods: {
-    message(id) {
+    message (id) {
       this.$router.push(`/chat/${id}`)
     }
   }

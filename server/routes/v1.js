@@ -38,9 +38,7 @@ router.delete('/blogpost/:blogpostId', passport.authenticate('jwt', { session:fa
 // Chat app
 router.post('/chat/:store/:customer', passport.authenticate('jwt', {session: false}), UserController.get);
 
-
 router.get('/dash', passport.authenticate('jwt', {session:false}), HomeController.Dashboard);
-
 
 //********* API DOCUMENTATION **********
 module.exports = router;

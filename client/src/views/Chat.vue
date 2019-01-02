@@ -1,5 +1,6 @@
 <template>
 <div class="flex flex-col w-full m-auto max-w-xs h-screen">
+  <router-link to="/chatlobby">back to chat lobby</router-link>
   <h2>Chat With : {{ userData.first + ' ' + userData.last }}</h2>
   <div class="mb-4 mt-4">
       <input
@@ -9,10 +10,10 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 
 export default {
-  data() {
+  data () {
     return {
       userData: ''
     }
@@ -30,5 +31,3 @@ export default {
   }
 }
 </script>
-
-

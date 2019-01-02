@@ -15,6 +15,9 @@ export default new Vuex.Store({
     },
     SET_TOKEN (state, token) {
       state.token = token
+    },
+    LOG_OUT (state) {
+      state.token = null
     }
   },
   getters: {
@@ -22,11 +25,14 @@ export default new Vuex.Store({
     authStatus: state => state.status
   },
   actions: {
-    setCredentials({ commit }, creds) {
+    setCredentials ({ commit }, creds) {
       commit('SET_CREDENTIALS', creds)
     },
-    setToken({ commit }, token) {
+    setToken ({ commit }, token) {
       commit('SET_TOKEN', token)
+    },
+    logOut ({ commit }) {
+      commit('LOG_OUT')
     }
   }
 })

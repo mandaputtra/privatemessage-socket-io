@@ -12,14 +12,13 @@
 <script>
 export default {
   methods: {
-    logOut() {
-      this.$store.state.token = '',
+    logOut () {
+      this.$store.dispatch('logOut')
       localStorage.clear()
     }
   }
 }
 </script>
-
 
 <style lang="stylus">
 #app
