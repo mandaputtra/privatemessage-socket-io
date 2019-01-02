@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div id="nav" v-if="!this.$store.state.token">
       <router-link to="/">Login</router-link> |
       <router-link to="/register">Register</router-link>
     </div>

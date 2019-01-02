@@ -17,6 +17,11 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: () => import('./views/Register.vue')
+    },
+    {
+      path: '/chatlobby',
+      name: 'chatlobby',
+      component: () => import('./views/ChatLobby.vue')
     }
   ]
 })

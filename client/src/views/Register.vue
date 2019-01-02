@@ -53,36 +53,36 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        email: '',
-        password: '',
-        firstname: '',
-        lastname: '',
-        phone: ''
+export default {
+  data () {
+    return {
+      email: '',
+      password: '',
+      firstname: '',
+      lastname: '',
+      phone: ''
+    }
+  },
+  methods: {
+    register () {
+      let data = {
+        email: this.email,
+        password: this.password,
+        first: this.firstname,
+        last: this.lastname,
+        phone: this.phone
       }
-    },
-    methods: {
-      register() {
-        let data = {
-          email: this.email,
-          password: this.password,
-          first: this.firstname,
-          last: this.lastname,
-          phone: this.phone
+      fetch(this.$baseURL + 'users/register', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
         }
-        fetch(this.$baseURL + 'users/register', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          .then(response => console.log(response.token))
-          .catch(err => console.log('err -', err))
-      }
+      })
+        .then(response => console.log(response.token))
+        .catch(err => console.log('err -', err))
     }
   }
+}
 
 </script>
