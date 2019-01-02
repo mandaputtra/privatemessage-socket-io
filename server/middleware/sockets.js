@@ -4,7 +4,7 @@ module.exports.listen = function(app){
     io = socketio.listen(app)
 
     io.on('connection', socket => {
-      console.log('coneccted user', socket)
+      console.log('coneccted user', socket.id)
     })
 
     return io

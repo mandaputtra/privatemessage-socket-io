@@ -1,8 +1,8 @@
 <template>
   <div>
     <form>
-      <input type="text" placeholder="email">
-      <input type="text" placeholder="passoword">
+      <input type="text" placeholder="email" v-model="email">
+      <input type="text" placeholder="password" v-model="password">
       <button @click="login()">Login</button>
     </form>
   </div>
@@ -24,8 +24,11 @@ export default {
       }
       fetch(this.$baseURL + 'users/login', {
         method: 'POST',
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
       })
+      .then( response => console.log(response.json()))
+      .catch( err => console.log(err))
     }
   }
 }
