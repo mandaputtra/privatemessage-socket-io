@@ -50,8 +50,14 @@ export default {
       })
         .then(response => {
           let token = response.data.token
+          let userData = {
+            email: response.data.user.email,
+            name: `${response.data.user.first} ${response.data.user.last}`,
+            phone: response.data.user.phone
+          }
           localStorage.setItem('user-token', token)
           this.$store.state.token = token
+          this.$store.state.credentials = userData
           this.$router.push('/chatlobby')
         })
         .catch(err => {

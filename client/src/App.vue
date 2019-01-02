@@ -2,11 +2,25 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Login</router-link> |
-      <router-link to="/register">Register</router-link>
+      <router-link to="/register">Register</router-link> |
+      <router-link to="/" @click="logOut()">Logout</router-link>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    logOut() {
+      this.$store.state.token = '',
+      localStorage.clear()
+    }
+  }
+}
+</script>
+
+
 <style lang="stylus">
 #app
   font-family 'Avenir', Helvetica, Arial, sans-serif
