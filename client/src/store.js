@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    token: '',
+    token: localStorage.getItem('user-token'),
     status: '',
     credentials: null
   },
@@ -22,7 +22,8 @@ export default new Vuex.Store({
   },
   getters: {
     isAuthenticated: state => !!state.token,
-    authStatus: state => state.status
+    authStatus: state => state.status,
+    userName : state => state.credentials.name
   },
   actions: {
     setCredentials ({ commit }, creds) {

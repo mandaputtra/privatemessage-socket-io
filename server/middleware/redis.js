@@ -16,4 +16,5 @@ redis.subscribe('chat', (err, count) => {
 });
 
 exports.sendMessage = message => pub.publish('chat', message);
+exports.saveUser = userId => pub.publish('saveUserId', userId);
 exports.redis = redis;
