@@ -1,11 +1,10 @@
 <template>
   <div>
-    <input type="text" placeholder="email">
-    <input type="text" placeholder="last name">
-    <input type="text" placeholder="first name">
-    <input type="text" placeholder="username">
-    <input type="text" placeholder="password">
-    <input type="text" placeholder="phone">
+    <input type="text" placeholder="email" v-model="email">
+    <input type="text" placeholder="last name" v-model="lastname">
+    <input type="text" placeholder="first name" v-model="firstname">
+    <input type="text" placeholder="password" v-model="password">
+    <input type="text" placeholder="phone" v-model="phone">
     <button @click="register()">Register</button>
   </div>
 </template>
@@ -35,8 +34,8 @@ export default {
         body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' }
       })
-      .then( response => console.log(response.json()))
-      .catch( err => console.log(err))
+        .then(response => console.log(response.token))
+        .catch(err => console.log('err -', err))
     }
   }
 }

@@ -7,7 +7,7 @@ import io from 'socket.io-client'
 
 Vue.use(VueSocketio, io('http://localhost:3000/'))
 Vue.config.productionTip = false
-Vue.prototype.$baseURL = 'http://localhost:3000/'
+Vue.prototype.$baseURL = 'http://localhost:3000/v1/'
 
 new Vue({
   router,

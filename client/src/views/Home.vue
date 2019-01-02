@@ -1,14 +1,14 @@
 <template>
   <div>
-    <form>
       <input type="text" placeholder="email" v-model="email">
       <input type="text" placeholder="password" v-model="password">
       <button @click="login()">Login</button>
-    </form>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data () {
     return {
@@ -18,17 +18,18 @@ export default {
   },
   methods: {
     login () {
-      let data = {
+      axios.post(this.$baseURL + 'users/login', {
         email: this.email,
         password: this.password
-      }
-      fetch(this.$baseURL + 'users/login', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
       })
-      .then( response => console.log(response.json()))
-      .catch( err => console.log(err))
+        .then(response => {
+          let token = response.data.token
+          localStorage.setItem('user-token', token)
+        })
+        .catch(err => {
+          console.log(err)
+          localStorage.removeItem('user-token')
+        })
     }
   }
 }
