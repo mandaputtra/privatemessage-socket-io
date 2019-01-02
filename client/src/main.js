@@ -6,7 +6,6 @@ import VueSocketio from 'vue-socket.io-extended'
 import io from 'socket.io-client'
 import '@/assets/tailwind.css'
 
-
 Vue.use(VueSocketio, io('http://localhost:3000/'))
 Vue.config.productionTip = false
 Vue.prototype.$baseURL = 'http://localhost:3000/v1/'
