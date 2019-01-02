@@ -1,18 +1,32 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <form>
+      <input type="text" placeholder="email">
+      <input type="text" placeholder="passoword">
+      <button @click="login()">Login</button>
+    </form>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    login () {
+      let data = {
+        email: this.email,
+        password: this.password
+      }
+      fetch(this.$baseURL + 'users/login', {
+        method: 'POST',
+        body: JSON.stringify(data)
+      })
+    }
   }
 }
 </script>
