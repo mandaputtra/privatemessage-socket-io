@@ -25,6 +25,7 @@ export default {
         .then(response => {
           let token = response.data.token
           localStorage.setItem('user-token', token)
+          this.$store.state.token = token
         })
         .catch(err => {
           console.log(err)
