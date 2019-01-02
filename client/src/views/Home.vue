@@ -52,6 +52,7 @@ export default {
           let token = response.data.token
           localStorage.setItem('user-token', token)
           this.$store.state.token = token
+          this.$router.push('/chatlobby')
         })
         .catch(err => {
           console.log(err)

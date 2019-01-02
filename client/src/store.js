@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     token: localStorage.getItem('user-token'),
-    status: ''
+    status: '',
+    credentials: []
   },
   mutations: {
 

@@ -22,6 +22,11 @@ export default new Router({
       path: '/chatlobby',
       name: 'chatlobby',
       component: () => import('./views/ChatLobby.vue')
+    },
+    {
+      path: '/chat/:id',
+      name: 'chat',
+      component: () => import('./views/Chat.vue')
     }
   ]
 })

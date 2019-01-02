@@ -1,7 +1,9 @@
 <template>
   <div class="flex flex-col w-full m-auto max-w-xs h-screen">
     <h2 class="mt-4 mb-4">Your Contact List</h2>
-    <contact-list/>
+    <div v-for="(contact, index) in contactList" :key="index">
+      <contact-list :contact="contact"/>
+    </div>
   </div>
 </template>
 
@@ -13,8 +15,21 @@ export default {
   components: {
     'contact-list': ContactList
   },
-  mounted() {
-    axios.get(this.$baseURL + '')
+  data () {
+    return {
+      contactList: ''
+    }
+  },
+  mounted () {
+    axios.get(this.$baseURL + 'users/getall', {
+      headers: {
+        'Authorization': this.$store.state.token
+      }
+    })
+      .then(response => {
+        this.contactList = response.data.user
+      })
+      .catch(err => console.log(err))
   }
 }
 
