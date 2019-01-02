@@ -56,8 +56,8 @@ export default {
             phone: response.data.user.phone
           }
           localStorage.setItem('user-token', token)
-          this.$store.state.token = token
           this.$store.dispatch('setCredentials', userData)
+          this.$store.dispatch('setToken', token)
           this.$router.push('/chatlobby')
         })
         .catch(err => {

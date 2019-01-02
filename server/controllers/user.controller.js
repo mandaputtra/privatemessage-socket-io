@@ -44,6 +44,7 @@ const getAll = async function(req, res) {
   let err, user;
   [err, user] = await to(User.find({ _id: { $ne: req.user.id } }))
   if (err) return ReE(res, "error ocured when getting contact list");
+  // console.log(err)
   return ReS(res, { user: user });
 };
 module.exports.getAll = getAll;

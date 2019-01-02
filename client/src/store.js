@@ -5,13 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    token: localStorage.getItem('user-token'),
+    token: '',
     status: '',
     credentials: null
   },
   mutations: {
     SET_CREDENTIALS (state, creds) {
       state.credentials = creds
+    },
+    SET_TOKEN (state, token) {
+      state.token = token
     }
   },
   getters: {
@@ -21,6 +24,9 @@ export default new Vuex.Store({
   actions: {
     setCredentials({ commit }, creds) {
       commit('SET_CREDENTIALS', creds)
+    },
+    setToken({ commit }, token) {
+      commit('SET_TOKEN', token)
     }
   }
 })
