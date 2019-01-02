@@ -7,16 +7,20 @@ export default new Vuex.Store({
   state: {
     token: localStorage.getItem('user-token'),
     status: '',
-    credentials: {}
+    credentials: null
   },
   mutations: {
-
+    SET_CREDENTIALS (state, creds) {
+      state.credentials = creds
+    }
   },
   getters: {
     isAuthenticated: state => !!state.token,
     authStatus: state => state.status
   },
   actions: {
-
+    setCredentials({ commit }, creds) {
+      commit('SET_CREDENTIALS', creds)
+    }
   }
 })

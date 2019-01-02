@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col w-full m-auto max-w-xs h-screen">
-    <h2 class="mt-4 mb-4">Your Contact List</h2>
+    <h2 class="mt-4 mb-4">{{ this.$store.state.credentials.name }} Contact List</h2>
     <div v-for="(contact, index) in contactList" :key="index">
       <contact-list :contact="contact"/>
     </div>
