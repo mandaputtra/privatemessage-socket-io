@@ -5,7 +5,7 @@
         alt="">
       <div class="text-center sm:text-left sm:flex-grow">
         <div class="mb-4">
-          <p class="text-xl leading-tight">Adam Wathan</p>
+          <p class="text-md leading-tight">Adam Wathan</p>
           <p class="text-sm leading-tight text-grey-dark">Developer at NothingWorks Inc.</p>
         </div>
         <div>
@@ -15,3 +15,9 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: ['name', 'email']
+}
+</script>

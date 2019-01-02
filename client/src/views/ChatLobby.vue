@@ -7,10 +7,14 @@
 
 <script>
 import ContactList from '../components/Contact'
+import axios from 'axios'
 
 export default {
   components: {
     'contact-list': ContactList
+  },
+  mounted() {
+    axios.get(this.$baseURL + '')
   }
 }
 

@@ -39,6 +39,15 @@ const get = async function(req, res) {
 };
 module.exports.get = get;
 
+const getAll = async function(req, res) {
+  res.setHeader("Content-Type", "application/json");
+  let err, user;
+  [err, user] = await to(User.find({}))
+  if (err) return ReE(res, "error ocured when getting contact list");
+  return ReS(res, { user: user });
+};
+module.exports.getAll = getAll;
+
 const update = async function(req, res) {
   let err, user, data;
   user = req.user;
