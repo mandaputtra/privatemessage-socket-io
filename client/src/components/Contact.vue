@@ -9,7 +9,7 @@
           <p class="text-sm leading-tight text-grey-dark">{{ contact.email }}</p>
         </div>
         <div>
-          <button @click="message(contact._id)"
+          <button @click="message(contact)"
           class="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">Message</button>
         </div>
       </div>
@@ -19,10 +19,16 @@
 
 <script>
 export default {
-  props: ['contact'],
+  props: ['contact', 'contactWhoChat'],
   methods: {
-    message (id) {
-      this.$router.push(`/chat/${id}`)
+    message (contact) {
+      let fullname = `${contact.first} ${contact.last}`
+      let payload = {
+        whoChat: this.contactWhoChat,
+        whoGet: { name: fullname, email: contact.email }
+      }
+      this.$socket.emit('joinChatRoom', payload)
+      this.$router.push(`/chat/${contact._id}`)
     }
   }
 }

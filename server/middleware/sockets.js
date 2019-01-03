@@ -1,5 +1,5 @@
 const socketio = require('socket.io')
-const { redis, sendMessage, saveUser } = require('./redis')
+const { redis, saveUser } = require('./redis')
 
 module.exports.listen = function(app){
     io = socketio.listen(app)
@@ -7,8 +7,12 @@ module.exports.listen = function(app){
     io.on('connection', socket => {
       console.log('connected user', socket.id)
 
-      socket.on('joinChatRoom', (roomName, clientId) => {
-        client.join(roomName)
+      socket.on('joinChatLobby', (payload) => {
+        redis.set(payload.name, payload.email)
+      })
+
+      socket.on('joinChatRoom', (payload) => {
+        console.log(payload)
       })
 
       socket.on('chatSomebody', (clientId, roomName, clientThatChat) => {

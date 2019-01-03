@@ -1,7 +1,7 @@
 <template>
 <div class="flex flex-col w-full m-auto max-w-xs h-screen">
   <router-link to="/chatlobby">back to chat lobby</router-link>
-  <h2>Chat With : {{ userData.first + ' ' + userData.last }}</h2>
+  <h2>Chat With : {{ userData.first + ' ' + userData.last }} | {{ userData.email }}</h2>
 
   <div v-for="(item, index) in chat" class="mt-5" :key="index">
     <span><b>{{ item.user }}</b> : {{ item.message }}</span>
@@ -20,6 +20,9 @@
 import axios from 'axios'
 
 export default {
+  sockets: {
+
+  },
   data () {
     return {
       message: '',

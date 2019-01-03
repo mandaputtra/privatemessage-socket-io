@@ -8,13 +8,6 @@ const redisConfig = {
 const redis = new Redis(redisConfig);
 const pub = new Redis(redisConfig);
 
-redis.subscribe('chat', (err, count) => {
-  if (err) {
-    throw err;
-  }
-  console.log('Subscribed to chat channel:', count);
-});
-
-exports.sendMessage = message => pub.publish('chat', message);
-exports.saveUser = userId => pub.publish('saveUserId', userId);
+// exports.sendMessage = message => pub.publish('chat', message);
+// exports.saveUser = userId => redis.set('foo', 'bar');
 exports.redis = redis;

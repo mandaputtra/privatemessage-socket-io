@@ -59,6 +59,7 @@ export default {
           this.$store.dispatch('setCredentials', userData)
           this.$store.dispatch('setToken', token)
           this.$router.push('/chatlobby')
+          this.$socket.emit('joinChatLobby', userData)
         })
         .catch(err => {
           console.log(err)
