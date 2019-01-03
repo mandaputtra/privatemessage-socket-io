@@ -21,7 +21,9 @@ import axios from 'axios'
 
 export default {
   sockets: {
-
+    someoneChat(payload) {
+      console.log('someone chat', payload)
+    }
   },
   data () {
     return {

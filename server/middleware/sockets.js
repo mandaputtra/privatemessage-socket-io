@@ -6,19 +6,21 @@ module.exports.listen = function(app){
 
     io.on('connection', socket => {
       console.log('connected user', socket.id)
+      io.to(socket.id).emit('someoneChat', 'data');
 
       socket.on('joinChatLobby', (payload) => {
-        redis.set(payload.name, payload.email)
+        redis.set(payload.email, socket.id)
       })
 
       socket.on('joinChatRoom', (payload) => {
-        console.log(payload)
+        // console.log(payload);
+        io.to(socket.id).emit('someoneChat', payload);
       })
 
-      socket.on('chatSomebody', (clientId, roomName, clientThatChat) => {
-        client.join(roomName)
-        io.emit('someoneChat', clientThatChat)
-      })
+      // socket.on('chatSomebody', (clientId, roomName, clientThatChat) => {
+      //   client.join(roomName)
+      //   io.emit('someoneChat', clientThatChat)
+      // })
 
       socket.on('chat', (message) => {
         console.log(message)
