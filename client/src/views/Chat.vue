@@ -21,8 +21,11 @@ import axios from 'axios'
 
 export default {
   sockets: {
-    someoneChat(payload) {
-      console.log('someone chat', payload)
+    join() {
+      console.log('someone chat')
+    },
+    chat(data) {
+      console.log(data)
     }
   },
   data () {
@@ -47,9 +50,9 @@ export default {
     sendChat () {
       let message = this.message
       let chat = this.chat
-      let user = this.$store.getters.userName
-      this.$socket.emit('chat', { user, message })
-      chat.push({ user, message })
+      // let user = this.$store.getters.userName
+      this.$socket.emit('chat', message)
+      chat.push( message )
 
       // make chat input clear again
       this.message = null

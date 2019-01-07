@@ -12,20 +12,14 @@ module.exports.listen = function(app){
         redis.set(payload.email, socket.id)
       })
 
-      socket.on('joinChatRoom', (payload) => {
-        // console.log(payload);
-        io.to(socket.id).emit('someoneChat', payload);
-      })
-
-      // socket.on('chatSomebody', (clientId, roomName, clientThatChat) => {
-      //   client.join(roomName)
-      //   io.emit('someoneChat', clientThatChat)
-      // })
-
       socket.on('chat', (message) => {
-        console.log(message)
-        // io.sockets.in(roomName).emit('chat', message)
+        io.emit('chat', message)
       })
+
+      socket.on('join', (message) => {
+        io.emit('join', message)
+      })
+
     })
 
     return io

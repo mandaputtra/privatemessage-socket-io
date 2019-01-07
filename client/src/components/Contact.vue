@@ -27,7 +27,7 @@ export default {
         whoChat: this.contactWhoChat,
         whoGet: { name: fullname, email: contact.email }
       }
-      this.$socket.emit('joinChatRoom', payload)
+      this.$socket.emit('join', payload)
       this.$router.push(`/chat/${contact._id}`)
     }
   }

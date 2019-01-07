@@ -62,7 +62,7 @@ export default {
           this.$socket.emit('joinChatLobby', userData)
         })
         .catch(err => {
-          console.log(err)
+          console.log('err -', err.response.data)
           localStorage.removeItem('user-token')
         })
     }

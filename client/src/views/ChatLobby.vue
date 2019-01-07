@@ -15,6 +15,14 @@ export default {
   components: {
     'contact-list': ContactList
   },
+  sockets: {
+    join() {
+      console.log('someone chat')
+    },
+    chat(data) {
+      console.log(data)
+    }
+  },
   data () {
     return {
       contactList: ''
