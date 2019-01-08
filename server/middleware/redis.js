@@ -8,6 +8,5 @@ const redisConfig = {
 const redis = new Redis(redisConfig);
 const pub = new Redis(redisConfig);
 
-// exports.sendMessage = message => pub.publish('chat', message);
-// exports.saveUser = userId => redis.set('foo', 'bar');
+exports.sendMessage = message => pub.publish('chat', message);
 exports.redis = redis;
