@@ -76,7 +76,7 @@ UserSchema.virtual('full_name').get(function () { //now you can treat as if this
 
 UserSchema.methods.getJWT = function(){
     let expiration_time = parseInt(CONFIG.jwt_expiration);
-    return "Bearer "+jwt.sign({user_id:this._id}, CONFIG.jwt_encryption, {expiresIn: expiration_time});
+    return jwt.sign({user_id:this._id}, CONFIG.jwt_encryption, {expiresIn: expiration_time});
 };
 
 UserSchema.methods.toWeb = function(){
