@@ -15,13 +15,10 @@ module.exports.listen = function(app){
       })
 
       socket.on('send', (payload) => {
-        console.log(payload);
         const receiverId = sessionsMap[payload.email];
         const messageData = 'halo dari sebelah';
         socket.broadcast.to(receiverId).emit('send', messageData);
       });
-
     })
-
     return io
 }

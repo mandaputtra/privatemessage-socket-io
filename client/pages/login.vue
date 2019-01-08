@@ -40,7 +40,7 @@ export default {
         // send custom socket-id for saving on server
         this.$socket.emit('join', login.user)
       } catch(err) {
-        console.log(err)
+        console.log(err.response)
       }
     }
   }
