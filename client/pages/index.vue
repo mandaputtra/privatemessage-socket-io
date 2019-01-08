@@ -4,6 +4,8 @@
       <v-flex xs12>
         <v-card dark color="primary">
           <v-card-text class="px-0">{{ name }}</v-card-text>
+          <v-spacer></v-spacer>
+          <v-btn flat block>Logout </v-btn>
         </v-card>
       </v-flex>
       <v-flex v-for="(item, index) in contact" :key="index" xs6>
@@ -23,6 +25,11 @@
 <script>
 // jain@mumby.mail
 export default {
+  sockets: {
+    send (data) {
+      console.log(data)
+    }
+  },
   data () {
     return {
       name: this.$store.getters.fullname,
@@ -30,8 +37,13 @@ export default {
     }
   },
   methods: {
-    chatUser(payload) {
+    chatUser (payload) {
       // this.$router.push(`/chat/${payload._id}`)
+      this.$socket.emit('send', payload)
+    },
+    logout () {
+      this.$store.commit('logout')
+      this.$router.push('/login')
     }
   },
   async mounted () {

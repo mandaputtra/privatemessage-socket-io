@@ -9,6 +9,9 @@ export const mutations = {
   },
   saveUserData (state, payload) {
     state.userData = payload
+  },
+  logout (state) {
+    state.token = null
   }
 }
 
