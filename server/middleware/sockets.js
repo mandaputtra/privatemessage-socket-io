@@ -7,20 +7,15 @@ module.exports.listen = function(app){
 
     io.on('connection', socket => {
       console.log('connected user', socket.id)
-      const sessionId = socket.id;
 
-      socket.on('join', () => {
-        socket.emit('askForUserId');
+      socket.on('join', (payload) => {
+        console.log(payload)
+        sessionsMap[payload.email] = socket.id;
+        console.log(sessionsMap)
       })
 
-      socket.on('userIdReceived', (userId) => {
-        console.log(userId)
-        sessionsMap[userId] = sessionId;
-        console.log(sessionsMap)
-      });
-
       socket.on('send', (payload) => {
-        const receiverId = sessionsMap[payload.whoGet.email];
+        const receiverId = sessionsMap[payload.email];
         const messageData = 'halo dari sebelah';
         socket.broadcast.to(receiverId).emit('my message', messageData);
       });

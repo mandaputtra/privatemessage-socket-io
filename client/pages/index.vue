@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     chatUser(payload) {
-      this.$router.push(`/chat/${payload._id}`)
+      // this.$router.push(`/chat/${payload._id}`)
     }
   },
   async mounted () {

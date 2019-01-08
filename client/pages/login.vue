@@ -37,6 +37,8 @@ export default {
         // save user data
         this.$store.commit('saveUserData', login.user)
         this.$router.push('/')
+        // send custom socket-id for saving on server
+        this.$socket.emit('join', login.user)
       } catch(err) {
         console.log(err)
       }

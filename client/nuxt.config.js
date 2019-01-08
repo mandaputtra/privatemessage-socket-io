@@ -36,7 +36,10 @@ module.exports = {
   */
   plugins: [
     '@/plugins/vuetify',
-    '@/plugins/vuesocket'
+    {
+      src: '@/plugins/vuesocket',
+      ssr: false, // <-- this line is required
+    },
   ],
 
   /*
