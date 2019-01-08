@@ -5,7 +5,6 @@ const router = express.Router();
 
 const UserController = require('../controllers/user.controller');
 const HomeController = require('../controllers/home.controller');
-const BlogPostController = require('../controllers/blogpost.controller');
 
 
 const custom = require('./../middleware/custom');
@@ -25,15 +24,7 @@ router.get('/users/getall', passport.authenticate('jwt', { session:false }), Use
 router.get('/users/:id', passport.authenticate('jwt', { session:false }), UserController.getOne);        // R
 router.put('/users', passport.authenticate('jwt', { session:false }), custom.isLogedInUser, UserController.update);     // U
 router.delete('/users', passport.authenticate('jwt', { session:false }), custom.isLogedInUser, UserController.remove);  // D
-router.get('/users/:id/blog', UserController.getUserAndBlogPost);  // R
-router.get('/userstest', UserController.getUserAndBlogPostTest);  // R
 router.post('/users/login', UserController.login);
-
-router.post('/blogpost', passport.authenticate('jwt', { session:false }), BlogPostController.create); // C
-router.get('/blogpost', BlogPostController.getAll); // R
-router.get('/blogpost/:blogpostId', passport.authenticate('jwt', { session:false }), BlogPostController.get); // R
-router.put('/blogpost/:blogpostId', passport.authenticate('jwt', { session:false }), custom.blogpostAuthor, BlogPostController.update); // U
-router.delete('/blogpost/:blogpostId', passport.authenticate('jwt', { session:false }), custom.blogpostAuthor, BlogPostController.deleteById); // D
 
 // Chat app
 router.post('/chat/:store/:customer', passport.authenticate('jwt', {session: false}), UserController.get);
