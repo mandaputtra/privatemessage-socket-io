@@ -5,7 +5,7 @@
         <v-card dark color="primary">
           <v-card-text class="px-0">{{ name }}</v-card-text>
           <v-spacer></v-spacer>
-          <v-btn flat block>Logout </v-btn>
+          <v-btn flat block @click="logout()">Logout </v-btn>
         </v-card>
       </v-flex>
       <v-flex v-for="(item, index) in contact" :key="index" xs6>
@@ -38,8 +38,12 @@ export default {
   },
   methods: {
     chatUser (payload) {
-      // this.$router.push(`/chat/${payload._id}`)
-      this.$socket.emit('send', payload)
+      const data = {
+        sender: this.$store.state.userData.email,
+        whoget: payload
+      }
+      this.$router.push(`/chat/${payload._id}?${this.$store.state.userData._id}`)
+      this.$socket.emit('chatSomeone', data)
     },
     logout () {
       this.$store.commit('logout')

@@ -15,8 +15,11 @@ module.exports.listen = function(app){
       })
 
       socket.on('send', (payload) => {
-        const receiverId = sessionsMap[payload.email];
-        const messageData = 'halo dari sebelah';
+        const receiverId = sessionsMap[payload.whoget.email];
+        const messageData = {
+          message: 'Hello someone chat you',
+          sender: payload.sender.email
+        };
         socket.broadcast.to(receiverId).emit('send', messageData);
       });
     })
