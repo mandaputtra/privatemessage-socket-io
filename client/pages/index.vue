@@ -43,7 +43,7 @@ export default {
         whoget: payload
       }
       this.$router.push(`/chat/${payload._id}?${this.$store.state.userData._id}`)
-      this.$socket.emit('chatSomeone', data)
+      this.$socket.emit('send', data)
     },
     logout () {
       this.$store.commit('logout')

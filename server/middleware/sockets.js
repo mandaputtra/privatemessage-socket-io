@@ -9,7 +9,6 @@ module.exports.listen = function(app){
       console.log('connected user', socket.id)
 
       socket.on('join', (payload) => {
-        console.log(payload)
         sessionsMap[payload.email] = socket.id;
         console.log(sessionsMap)
       })
