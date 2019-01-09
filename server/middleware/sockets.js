@@ -21,6 +21,11 @@ module.exports.listen = function(app){
         };
         socket.broadcast.to(receiverId).emit('send', messageData);
       });
+
+      socket.on('chat', data => {
+        const receiverId = sessionsMap[data.email];
+        socket.broadcast.to(receiverId).emit('chat', data.message);
+      })
     })
     return io
 }

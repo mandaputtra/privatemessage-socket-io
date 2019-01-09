@@ -38,6 +38,11 @@ export default {
       message: ''
     }
   },
+  sockets: {
+    chat(data) {
+      this.chat.push(data)
+    }
+  },
   async mounted() {
     const userid = this.$route.params
     try {
@@ -52,7 +57,13 @@ export default {
       this.$router.push('/')
     },
     chatIn() {
-      if(this.message) this.chat.push(this.message)
+      if(this.message) {
+        let data = this.chatUser;
+        data['message'] = this.message
+        this.chat.push(this.message)
+        this.$socket.emit('chat', data)
+        this.message = '';
+      }
     }
   }
 }
