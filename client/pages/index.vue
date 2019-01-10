@@ -23,7 +23,6 @@
 </template>
 
 <script>
-// jain@mumby.mail
 export default {
   sockets: {
     send (data) {
