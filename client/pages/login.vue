@@ -1,13 +1,16 @@
 <template>
   <v-layout align-center justify-center row fill-height>
-    <v-flex xs8>
+    <v-flex xs4>
       <v-card>
-        <v-card-title class="headline"> Login </v-card-title>
+        <v-card-text class="title text-xs-center mb-2"> login to start chat! 😁 </v-card-text>
         <v-form class="mx-4 pb-4">
-          <v-text-field label="email" v-model="userData.email"></v-text-field>
-          <v-text-field type="password" label="password" v-model="userData.password"></v-text-field>
-          <v-btn flat block @click="login()"> login </v-btn>
+          <v-text-field outline label="email" v-model="userData.email"></v-text-field>
+          <v-text-field outline type="password" label="password" v-model="userData.password"></v-text-field>
+          <v-btn depressed color="primary" block @click="login()"> login </v-btn>
         </v-form>
+        <v-card-text class="caption text-xs-center">
+          Doesn't have an account yet? please register here <nuxt-link to="/register">📑</nuxt-link>
+        </v-card-text>
       </v-card>
     </v-flex>
   </v-layout>
