@@ -5,7 +5,7 @@ many points like storing message on the db and others things.
 
 TODO :
 - [ ] Storing Message
-- [ ] Registering User
+- [x] Registering User
 - [ ] Show some buble when user chat
 - [ ] User sessions
 
