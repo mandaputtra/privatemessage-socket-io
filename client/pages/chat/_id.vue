@@ -15,15 +15,15 @@
     </v-card>
   </v-flex>
   <v-flex>
-    <v-card class="pa-2">
+    <v-footer color="transparent" fixed>
       <v-text-field
         v-model="message"
         @keyup.13="chatIn()"
-        small
+        outline
         class="mx-4"
         label="type here"
         ></v-text-field>
-    </v-card>
+    </v-footer>
   </v-flex>
 </v-layout>
 </v-container>
@@ -60,6 +60,7 @@ export default {
       if(this.message) {
         let data = this.chatUser;
         data['message'] = this.message
+        data['from'] = this.$store.state.userData._id
         this.chat.push(this.message)
         this.$socket.emit('chat', data)
         this.message = '';

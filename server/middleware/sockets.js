@@ -1,5 +1,6 @@
 const socketio = require('socket.io')
 const { redis, saveUser } = require('./redis')
+const { Chat } = require('../models')
 const sessionsMap = {}
 
 module.exports.listen = function(app){
@@ -25,7 +26,26 @@ module.exports.listen = function(app){
       socket.on('chat', data => {
         const receiverId = sessionsMap[data.email];
         socket.broadcast.to(receiverId).emit('chat', data.message);
+        Chat.findOne({ user_a: data._id, user_b: data.from }, (err, chatdata) => {
+          if(err) throw err
+          if(chatdata) {
+            Chat.updateOne( { _id: chatdata._id }, { $push: { message: {
+              from: data.from,
+              type: 'Text',
+              text: data.message
+              }}
+            }, { safe: true, upsert: true }, (err, data) => console.log(data))
+          } else {
+            Chat.create({ user_a: data._id, user_b: data.from, message: [{
+                from: data.from,
+                type: 'Text',
+                text: data.message
+              }]
+            })
+          }
+        })
       })
+
     })
-    return io
+  return io
 }

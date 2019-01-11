@@ -79,6 +79,5 @@ UserSchema.methods.toWeb = function(){
     return json;
 };
 
-let User = module.exports = mongoose.model('User', UserSchema);
-
+module.exports = mongoose.model('User', UserSchema);
 
