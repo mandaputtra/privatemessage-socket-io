@@ -5,7 +5,10 @@ const find = async (req, res) => {
   const { userid } = req.params;
   let err, chat;
 
-  [err, chat] = await to(Chat.findOne({ user_a: userid, user_b: req.query.f }))
+  [err, chat] = await to(Chat.findOne({ $or: {
+      user_a: userid, user_b: req.query.f
+    }}
+  ))
   if (err) return ReE(res, err, 500)
 
   if(chat) {
