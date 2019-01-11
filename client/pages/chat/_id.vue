@@ -11,7 +11,7 @@
   </v-flex>
   <v-flex>
     <v-card v-for="(item, index) in chat" class="mb-2" :key="index">
-      <v-card-text>{{ item }}</v-card-text>
+      <v-card-text>{{ item.text }}</v-card-text>
     </v-card>
   </v-flex>
   <v-flex>
@@ -40,16 +40,27 @@ export default {
   },
   sockets: {
     chat(data) {
-      this.chat.push(data)
+      let chat = {
+        text: data
+      }
+      this.chat.push(chat)
     }
   },
   async mounted() {
-    const userid = this.$route.params
+    const userid = this.$route.params.id
+    const chatuser = this.$route.query.from
     try {
-      const userData = await this.$axios.get(`http://localhost:3231/v1/users/${userid.id}`)
+      const userData = await this.$axios.get(`http://localhost:3231/v1/users/${userid}`)
       this.chatUser = userData.data.user;
     } catch(err) {
       console.log(err)
+    }
+    // Try fetch message
+    try {
+      const chatData = await this.$axios.get(`http://localhost:3231/v1/chat/${userid}?f=${chatuser}`)
+      this.chat = chatData.data.data.message
+    } catch (err) {
+      console.log('No message before')
     }
   },
   methods: {
@@ -61,7 +72,10 @@ export default {
         let data = this.chatUser;
         data['message'] = this.message
         data['from'] = this.$store.state.userData._id
-        this.chat.push(this.message)
+        let message = {
+          text: this.message
+        }
+        this.chat.push(message)
         this.$socket.emit('chat', data)
         this.message = '';
       }

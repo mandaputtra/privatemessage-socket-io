@@ -5,6 +5,7 @@ const router = express.Router();
 
 const UserController = require('../controllers/user.controller');
 const HomeController = require('../controllers/home.controller');
+const ChatController = require('../controllers/chat.controller');
 
 
 const custom = require('./../middleware/custom');
@@ -25,6 +26,8 @@ router.get('/users/:id', passport.authenticate('jwt', { session:false }), UserCo
 router.put('/users', passport.authenticate('jwt', { session:false }), custom.isLogedInUser, UserController.update);     // U
 router.delete('/users', passport.authenticate('jwt', { session:false }), custom.isLogedInUser, UserController.remove);  // D
 router.post('/users/login', UserController.login);
+
+router.get('/chat/:userid', ChatController.find)
 
 // Chat app
 router.post('/chat/:store/:customer', passport.authenticate('jwt', {session: false}), UserController.get);
