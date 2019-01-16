@@ -36,11 +36,24 @@ module.exports.listen = function(app){
               }}
             }, { safe: true, upsert: true }, (err, data) => console.log(data))
           } else {
-            Chat.create({ user_a: data._id, user_b: data.from, message: [{
-                from: data.from,
-                type: 'Text',
-                text: data.message
-              }]
+            // find another user with same chat first if there isn't create one
+            Chat.findOne({ user_a: data.from, user_b: data._id }, (err, chatdata) => {
+              if(err) throw err
+              if(chatdata) {
+                Chat.updateOne( { _id: chatdata._id }, { $push: { message: {
+                  from: data.from,
+                  type: 'Text',
+                  text: data.message
+                  }}
+                }, { safe: true, upsert: true }, (err, data) => console.log(data))
+              } else {
+                Chat.create({ user_a: data._id, user_b: data.from, message: [{
+                  from: data.from,
+                  type: 'Text',
+                  text: data.message
+                  }]
+                })
+              }
             })
           }
         })
