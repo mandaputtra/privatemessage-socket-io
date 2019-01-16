@@ -3,6 +3,15 @@ const { redis, saveUser } = require('./redis')
 const { Chat } = require('../models')
 const sessionsMap = {}
 
+function updateChat(id, data_from, message) {
+  Chat.updateOne( { _id: id }, { $push: { message: {
+    from: data_from,
+    type: 'Text',
+    text: message
+    }}
+  }, { safe: true, upsert: true }, (err, data) => console.log(data))
+}
+
 module.exports.listen = function(app){
     io = socketio.listen(app)
 
@@ -29,23 +38,13 @@ module.exports.listen = function(app){
         Chat.findOne({ user_a: data._id, user_b: data.from }, (err, chatdata) => {
           if(err) throw err
           if(chatdata) {
-            Chat.updateOne( { _id: chatdata._id }, { $push: { message: {
-              from: data.from,
-              type: 'Text',
-              text: data.message
-              }}
-            }, { safe: true, upsert: true }, (err, data) => console.log(data))
+            updateChat(chatdata._id, data.from, data.message)
           } else {
             // find another user with same chat first if there isn't create one
             Chat.findOne({ user_a: data.from, user_b: data._id }, (err, chatdata) => {
               if(err) throw err
               if(chatdata) {
-                Chat.updateOne( { _id: chatdata._id }, { $push: { message: {
-                  from: data.from,
-                  type: 'Text',
-                  text: data.message
-                  }}
-                }, { safe: true, upsert: true }, (err, data) => console.log(data))
+                updateChat(chatdata._id, data.from, data.message)
               } else {
                 Chat.create({ user_a: data._id, user_b: data.from, message: [{
                   from: data.from,
