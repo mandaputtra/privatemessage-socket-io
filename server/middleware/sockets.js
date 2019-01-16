@@ -12,6 +12,15 @@ function updateChat(id, data_from, message) {
   }, { safe: true, upsert: true }, (err, data) => console.log(data))
 }
 
+function createChat(user_a, user_b, message) {
+  Chat.create({ user_a, user_b, message: [{
+    from: user_b,
+    type: 'Text',
+    text: message
+    }]
+  })
+}
+
 module.exports.listen = function(app){
     io = socketio.listen(app)
 
@@ -34,7 +43,9 @@ module.exports.listen = function(app){
 
       socket.on('chat', data => {
         const receiverId = sessionsMap[data.email];
-        socket.broadcast.to(receiverId).emit('chat', data.message);
+        socket.broadcast.to(receiverId).emit('chat', data.message)
+        // find another user with same chat first if there isn't create one
+        // TODO: Make room approach
         Chat.findOne({ user_a: data._id, user_b: data.from }, (err, chatdata) => {
           if(err) throw err
           if(chatdata) {
@@ -46,12 +57,7 @@ module.exports.listen = function(app){
               if(chatdata) {
                 updateChat(chatdata._id, data.from, data.message)
               } else {
-                Chat.create({ user_a: data._id, user_b: data.from, message: [{
-                  from: data.from,
-                  type: 'Text',
-                  text: data.message
-                  }]
-                })
+                createChat(data._id, data.from, data.message)
               }
             })
           }

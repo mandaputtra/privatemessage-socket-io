@@ -4,7 +4,7 @@ Leverage the use of socket io to send message on specific socket.id, this projec
 many points like storing message on the db and others things.
 
 TODO :
-- [ ] Storing Message
+- [x] Storing Message
 - [x] Registering User
 - [ ] Show some buble when user chat
 - [ ] User sessions

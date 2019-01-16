@@ -22,7 +22,7 @@ app.use(passport.initialize());
 //Log Env
 consola.success("Environment:", CONFIG.app)
 //DATABASE
-const models = require("./models");
+require("./models");
 
 // CORS
 app.use(cors());
